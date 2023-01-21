@@ -56,12 +56,16 @@ const getMonthOfDays = (monthFirstDay, monthLastDate, prevMonthLastDate) => {
   }
   const len = weekOfDays.length;
   if (len > 0 && len < 7) {
-    for (let k = 1; k <= 7 - len; k += 1) {
+    for (let k = 1; k <= 7 - len; k++) {
       weekOfDays.push(k);
     }
   }
   if (weekOfDays.length > 0) dates.push(weekOfDays); // 남은 날짜 추가
   return dates;
+};
+const bindingClass = (i) => {
+  if (i === 0) return "txt-red";
+  if (i === 6) return "txt-blue";
 };
 calendarDate();
 </script>
@@ -75,7 +79,7 @@ calendarDate();
         </thead>
         <tbody>
           <tr v-for="(date, i) in dates" :key="i">
-            <td v-for="(day, x) in date" :key="x">
+            <td v-for="(day, x) in date" :key="x" :class="bindingClass(x)">
               {{ day }}
             </td>
           </tr>
