@@ -21,7 +21,7 @@ const calendarDate = () => {
     currentMonth.value
   );
   dates.value = getMonthOfDays(monthFirstDay, monthLastDate, lastMonthLastDate);
-  console.log([monthFirstDay, monthLastDate, lastMonthLastDate] )
+  console.log([monthFirstDay, monthLastDate, lastMonthLastDate]);
 };
 const getFirstDayLastDate = (year, month) => {
   const firstDay = new Date(year, month - 1, 1).getDay();
@@ -43,51 +43,51 @@ const getMonthOfDays = (monthFirstDay, monthLastDate, prevMonthLastDate) => {
   while (day <= monthLastDate) {
     if (day === 1) {
       for (let j = 0; j < monthFirstDay; j++) {
-        weekOfDays.push({'date':prevDay,'color':'txt-gray'});
+        weekOfDays.push({ date: prevDay, color: "txt-gray" });
         prevDay += 1;
       }
     }
-    console.log(weekOfDays)
-    weekOfDays.push({'date':day});
-    
+    console.log(weekOfDays);
+    weekOfDays.push({ date: day });
+
     if (weekOfDays.length === 7) {
       dates.push(weekOfDays);
-      weekOfDays = []; 
+      weekOfDays = [];
     }
     day += 1;
   }
   const len = weekOfDays.length;
   if (len > 0 && len < 7) {
     for (let k = 1; k <= 7 - len; k++) {
-      weekOfDays.push({'date':k,'color':'txt-gray'});
+      weekOfDays.push({ date: k, color: "txt-gray" });
     }
   }
 
-  if (weekOfDays.length > 0) dates.push(weekOfDays); 
+  if (weekOfDays.length > 0) dates.push(weekOfDays);
   return dates;
 };
 const bindingClass = (i) => {
   if (i === 0) return "txt-red";
   if (i === 6) return "txt-blue";
 };
-const nextMonth = () =>{
-  if(currentMonth.value === 12){
+const nextMonth = () => {
+  if (currentMonth.value === 12) {
     currentYear.value++;
-    currentMonth.value = 1
-  }else{
-  currentMonth.value++;}
+    currentMonth.value = 1;
+  } else {
+    currentMonth.value++;
+  }
   calendarDate();
-}
+};
 const prevMonth = () => {
-  if(currentMonth.value===1)
-    {
-      currentYear.value--;
-      currentMonth.value = 12
-    }else{
-      currentMonth.value--;
-    }
-    calendarDate();
-}
+  if (currentMonth.value === 1) {
+    currentYear.value--;
+    currentMonth.value = 12;
+  } else {
+    currentMonth.value--;
+  }
+  calendarDate();
+};
 calendarDate();
 </script>
 
@@ -96,9 +96,9 @@ calendarDate();
     <div id="cal-wrap">
       <div class="cal-header">
         <button @click="prevMonth()">&lt;</button>
-        <span>{{ currentYear }}-{{ ('00' + currentMonth).slice(-2) }}</span> 
+        <span>{{ currentYear }}-{{ ("00" + currentMonth).slice(-2) }}</span>
         <button @click="nextMonth()">></button>
-        </div>
+      </div>
       <table>
         <thead class="weekdays">
           <th v-for="i in weekDays" :key="i" :class="i.class">{{ i.name }}</th>
