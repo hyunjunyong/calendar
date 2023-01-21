@@ -44,6 +44,8 @@ ul {
 button{
   border:none;
   outline:0;
+  cursor: pointer;
+  background: none;
 }
 .txt-red{
   color:red;

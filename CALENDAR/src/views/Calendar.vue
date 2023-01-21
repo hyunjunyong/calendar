@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from "vue";
-let currentDate = ref();
+// let currentDate = ref();
 const dates = ref([]);
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth() + 1;
+let currentYear = ref(new Date().getFullYear());
+let currentMonth = ref(new Date().getMonth() + 1);
 
 let weekDays = [
   { name: "일", class: "txt-red" },
@@ -17,8 +17,8 @@ let weekDays = [
 
 const calendarDate = () => {
   const [monthFirstDay, monthLastDate, lastMonthLastDate] = getFirstDayLastDate(
-    currentYear,
-    currentMonth
+    currentYear.value,
+    currentMonth.value
   );
   dates.value = getMonthOfDays(monthFirstDay, monthLastDate, lastMonthLastDate);
   console.log([monthFirstDay, monthLastDate, lastMonthLastDate] )
@@ -70,6 +70,24 @@ const bindingClass = (i) => {
   if (i === 0) return "txt-red";
   if (i === 6) return "txt-blue";
 };
+const nextMonth = () =>{
+  if(currentMonth.value === 12){
+    currentYear.value++;
+    currentMonth.value = 1
+  }else{
+  currentMonth.value++;}
+  calendarDate();
+}
+const prevMonth = () => {
+  if(currentMonth.value===1)
+    {
+      currentYear.value--;
+      currentMonth.value = 12
+    }else{
+      currentMonth.value--;
+    }
+    calendarDate();
+}
 calendarDate();
 </script>
 
@@ -77,9 +95,9 @@ calendarDate();
   <div id="calendar">
     <div id="cal-wrap">
       <div class="cal-header">
-        <button>&lt;</button>
+        <button @click="prevMonth()">&lt;</button>
         <span>{{ currentYear }}-{{ ('00' + currentMonth).slice(-2) }}</span> 
-        <button>></button>
+        <button @click="nextMonth()">></button>
         </div>
       <table>
         <thead class="weekdays">
