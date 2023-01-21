@@ -21,6 +21,7 @@ const calendarDate = () => {
     currentMonth
   );
   dates.value = getMonthOfDays(monthFirstDay, monthLastDate, lastMonthLastDate);
+  console.log([monthFirstDay, monthLastDate, lastMonthLastDate] )
 };
 const getFirstDayLastDate = (year, month) => {
   const firstDay = new Date(year, month - 1, 1).getDay();
@@ -41,26 +42,28 @@ const getMonthOfDays = (monthFirstDay, monthLastDate, prevMonthLastDate) => {
   let weekOfDays = [];
   while (day <= monthLastDate) {
     if (day === 1) {
-      for (let j = 0; j < monthFirstDay; j += 1) {
-        weekOfDays.push(prevDay);
+      for (let j = 0; j < monthFirstDay; j++) {
+        weekOfDays.push({'date':prevDay,'color':'txt-gray'});
         prevDay += 1;
       }
     }
-    weekOfDays.push(day);
+    console.log(weekOfDays)
+    weekOfDays.push({'date':day});
+    
     if (weekOfDays.length === 7) {
-      // 일주일 채우면
       dates.push(weekOfDays);
-      weekOfDays = []; // 초기화
+      weekOfDays = []; 
     }
     day += 1;
   }
   const len = weekOfDays.length;
   if (len > 0 && len < 7) {
     for (let k = 1; k <= 7 - len; k++) {
-      weekOfDays.push(k);
+      weekOfDays.push({'date':k,'color':'txt-gray'});
     }
   }
-  if (weekOfDays.length > 0) dates.push(weekOfDays); // 남은 날짜 추가
+
+  if (weekOfDays.length > 0) dates.push(weekOfDays); 
   return dates;
 };
 const bindingClass = (i) => {
@@ -79,8 +82,12 @@ calendarDate();
         </thead>
         <tbody>
           <tr v-for="(date, i) in dates" :key="i">
-            <td v-for="(day, x) in date" :key="x" :class="bindingClass(x)">
-              {{ day }}
+            <td
+              v-for="(day, x) in date"
+              :key="x"
+              :class="[bindingClass(x), day.color]"
+            >
+              {{ day.date }}
             </td>
           </tr>
         </tbody>
