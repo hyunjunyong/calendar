@@ -41,7 +41,10 @@ ul {
   display:flex;
   gap:10px;
 }
-
+button{
+  border:none;
+  outline:0;
+}
 .txt-red{
   color:red;
 }

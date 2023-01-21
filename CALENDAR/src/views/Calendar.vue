@@ -76,6 +76,11 @@ calendarDate();
 <template>
   <div id="calendar">
     <div id="cal-wrap">
+      <div class="cal-header">
+        <button>&lt;</button>
+        <span>{{ currentYear }}-{{ ('00' + currentMonth).slice(-2) }}</span> 
+        <button>></button>
+        </div>
       <table>
         <thead class="weekdays">
           <th v-for="i in weekDays" :key="i" :class="i.class">{{ i.name }}</th>

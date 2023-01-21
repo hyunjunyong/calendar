@@ -2,3 +2,7 @@ table {
   border-spacing: 10px;
 }
 
+.cal-header{
+  display:flex;
+  justify-content: space-between;
+}
