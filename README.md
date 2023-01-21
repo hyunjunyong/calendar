@@ -8,8 +8,13 @@
 
 1. 기준
    - DAY, WEEK, MONTH, YEAR
+   - default : MONTH
+   - MONTH로 출력 시 빈칸에는 이전 달, 다음 달을 표시
+   - 항상 이전, 다음 이동 가능해야 함
 2. TODO LIST(day)
 
+   - 하루 일 경우 .
+   - 기간 지정일 경우 Line으로
    - 색상 지정
 
 3. **Input tag**
@@ -33,3 +38,7 @@
    - default : KR
 
 8. 반응형
+
+9. 로그인 시 가족,친구,지인 일정 관리(연동 기능) -> 개발 미정
+
+10. dark mode theme
