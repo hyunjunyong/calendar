@@ -8,4 +8,7 @@
 
 <script setup>
 import Calendar from "../components/Calendar.vue";
+import { ref } from "vue";
+
+const today = new Date();
 </script>

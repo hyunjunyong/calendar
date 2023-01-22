@@ -13,25 +13,36 @@
       </thead>
       <tbody>
         <tr v-for="(date, i) in dates" :key="i">
-          <td
-            v-for="(day, x) in date"
-            :key="x"
-            :class="[bindingClass(x), day.color]"
-          >
-            {{ day.date }}
+          <td v-for="(day, x) in date" :key="x">
+            <button
+              :class="[bindingClass(x), day.color]"
+              @click="clickDate(day.date)"
+            >
+              {{ day.date }}
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <!-- <p>{{ currentDate }}</p> -->
 </template>
 
 <script setup>
-import { ref } from "vue";
-// let currentDate = ref();
+import { ref, defineProps, defineEmits } from "vue";
+// const props = defineProps({
+//   date: {
+//     Type: String,
+//     required: true,
+//   },
+// });
+const props = defineProps(["modelValue"]);
+const emits = defineEmits(["update:modelValue"]);
+// const emits = defineEmits(["update:value"]);
+let currentDate = ref(props.modelValue || new Date());
 const dates = ref([]);
-let currentYear = ref(new Date().getFullYear());
-let currentMonth = ref(new Date().getMonth() + 1);
+let currentYear = ref(new Date(props.modelValue).getFullYear());
+let currentMonth = ref(new Date(props.modelValue).getMonth() + 1);
 
 let weekDays = [
   { name: "일", class: "txt-red" },
@@ -49,7 +60,6 @@ const calendarDate = () => {
     currentMonth.value
   );
   dates.value = getMonthOfDays(monthFirstDay, monthLastDate, lastMonthLastDate);
-  console.log([monthFirstDay, monthLastDate, lastMonthLastDate]);
 };
 const getFirstDayLastDate = (year, month) => {
   const firstDay = new Date(year, month - 1, 1).getDay();
@@ -75,7 +85,6 @@ const getMonthOfDays = (monthFirstDay, monthLastDate, prevMonthLastDate) => {
         prevDay += 1;
       }
     }
-    console.log(weekOfDays);
     weekOfDays.push({ date: day });
 
     if (weekOfDays.length === 7) {
@@ -115,6 +124,11 @@ const prevMonth = () => {
     currentMonth.value--;
   }
   calendarDate();
+};
+const clickDate = (date) => {
+  currentDate.value = new Date(currentYear.value, currentMonth.value, date);
+
+  emits("update:value", currentDate.value);
 };
 calendarDate();
 </script>

@@ -42,6 +42,7 @@ ul {
   gap:10px;
 }
 button{
+  padding:0;
   border:none;
   outline:0;
   cursor: pointer;
