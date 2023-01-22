@@ -1,3 +1,31 @@
+<template>
+  <div id="cal-wrap">
+    <div class="cal-header">
+      <button @click="prevMonth()">&lt;</button>
+      <span>{{ currentYear }}-{{ ("00" + currentMonth).slice(-2) }}</span>
+      <button @click="nextMonth()">></button>
+    </div>
+    <table>
+      <thead class="weekdays">
+        <th v-for="i in weekDays" :key="i" :class="i.class">
+          {{ i.name }}
+        </th>
+      </thead>
+      <tbody>
+        <tr v-for="(date, i) in dates" :key="i">
+          <td
+            v-for="(day, x) in date"
+            :key="x"
+            :class="[bindingClass(x), day.color]"
+          >
+            {{ day.date }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+
 <script setup>
 import { ref } from "vue";
 // let currentDate = ref();
@@ -91,30 +119,4 @@ const prevMonth = () => {
 calendarDate();
 </script>
 
-<template>
-  <div id="calendar">
-    <div id="cal-wrap">
-      <div class="cal-header">
-        <button @click="prevMonth()">&lt;</button>
-        <span>{{ currentYear }}-{{ ("00" + currentMonth).slice(-2) }}</span>
-        <button @click="nextMonth()">></button>
-      </div>
-      <table>
-        <thead class="weekdays">
-          <th v-for="i in weekDays" :key="i" :class="i.class">{{ i.name }}</th>
-        </thead>
-        <tbody>
-          <tr v-for="(date, i) in dates" :key="i">
-            <td
-              v-for="(day, x) in date"
-              :key="x"
-              :class="[bindingClass(x), day.color]"
-            >
-              {{ day.date }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</template>
+<style lang="scss" scoped></style>
