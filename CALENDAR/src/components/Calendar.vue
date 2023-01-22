@@ -128,7 +128,7 @@ const prevMonth = () => {
 const clickDate = (date) => {
   currentDate.value = new Date(currentYear.value, currentMonth.value, date);
 
-  emits("update:value", currentDate.value);
+  emits("update:modelValue", currentDate.value);
 };
 calendarDate();
 </script>
