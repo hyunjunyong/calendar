@@ -6,7 +6,7 @@ import { RouterView } from "vue-router";
   <header>
     <router-link to="/"> basic calendar </router-link>
     <router-link to="/input"> input 예제 </router-link>
-    <router-link to="path" />
+    <router-link to="/TwoInput"> two input 예제 </router-link>
   </header>
   <RouterView />
 </template>
