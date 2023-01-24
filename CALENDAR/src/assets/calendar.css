@@ -30,3 +30,10 @@ table {
 .click button{
   color: white;
 }
+
+.period{
+  background-color:blue;
+}
+.period button{
+  color: white;
+}

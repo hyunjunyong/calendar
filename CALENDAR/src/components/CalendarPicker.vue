@@ -14,7 +14,11 @@
         </thead>
         <tbody>
           <tr v-for="(date, i) in dates" :key="i">
-            <td v-for="(day, x) in date" :key="x" :class="{ click: day.on }">
+            <td
+              v-for="(day, x) in date"
+              :key="x"
+              :class="{ click: day.on, period: day.period }"
+            >
               <button
                 :class="[bindingClass(x), day.color]"
                 @click="
@@ -95,7 +99,7 @@ const getMonthOfDays = (monthFirstDay, monthLastDate, prevMonthLastDate) => {
         prevDay += 1;
       }
     }
-    weekOfDays.push({ date: day, on: false });
+    weekOfDays.push({ date: day, on: false, period: false });
 
     if (weekOfDays.length === 7) {
       dates.push(weekOfDays);
@@ -145,11 +149,29 @@ const clickDate = (date) => {
   } else if (counter.value === 1) {
     endDate.value = currentDate.value;
     emits("update:endDate", endDate.value);
+    dates.value.map((e) => {
+      e.map((item) => {
+        if (
+          item.date > new Date(startDate.value).getDate() &&
+          item.date < new Date(endDate.value).getDate() &&
+          !item.color
+        ) {
+          item.period = true;
+        }
+        console.log(
+          item.date,
+          new Date(startDate.value).getDate(),
+          new Date(endDate.value).getDate()
+        );
+      });
+    });
+    console.log(2);
     counter.value++;
   } else {
     dates.value.map((e) => {
       e.map((item) => {
         item.on = false;
+        item.period = false;
       });
     });
     counter.value = 0;
