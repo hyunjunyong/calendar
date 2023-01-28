@@ -37,3 +37,8 @@ table {
 .period button{
   color: white;
 }
+
+.on{
+  background-color:blue;
+  color: white;
+}
