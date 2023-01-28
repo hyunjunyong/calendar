@@ -9,17 +9,23 @@
         </li>
       </ul>
     </header>
-    <transition name="fade">
-      <Calendar v-model="today" />
-    </transition>
+
+    <DayCalendar v-show="menuBtn[0].on" v-model="today" />
+    <WeekCalendar v-show="menuBtn[1].on" v-model="today" />
+    <Calendar v-show="menuBtn[2].on" v-model="today" />
+    <YearCalendar v-show="menuBtn[3].on" v-model="today" />
   </div>
 </template>
 
 <script setup>
 import Calendar from "../components/Calendar.vue";
+import DayCalendar from "../components/DayCalendar.vue";
+import WeekCalendar from "../components/WeekCalendar.vue";
+import YearCalendar from "../components/YearCalendar.vue";
+
 import { ref } from "vue";
 
-const today = new Date();
+const today = ref(new Date());
 let menuBtn = ref([
   { name: "DAY", on: false },
   { name: "WEEK", on: false },

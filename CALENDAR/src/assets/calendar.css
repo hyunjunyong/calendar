@@ -6,6 +6,7 @@ table {
   display:flex;
   justify-content: space-between;
   padding: 0 10px;
+  width:100%;
 }
 #cal-wrap{
   display:flex;
