@@ -11,10 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, props } from "vue";
+import { ref, defineProps, defineEmits } from "vue";
 
-const today = ref(new Date());
-let day = ref(today.value.getDate());
+const props = defineProps(["modelValue"]);
+const emits = defineEmits(["update:modelValue"]);
+
+let day = ref(props.modelValue?.getDate());
 const prevDay = () => {};
 const nextDay = () => {};
 </script>
